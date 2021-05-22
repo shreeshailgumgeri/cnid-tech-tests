@@ -1,5 +1,3 @@
-iam.tf
-
 resource "aws_iam_role" "machine" {
   name = "${local.system_name}-machine-role"
 
