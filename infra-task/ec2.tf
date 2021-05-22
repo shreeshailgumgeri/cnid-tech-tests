@@ -2,18 +2,13 @@ data "aws_ami" "amazon_linux" {
   most_recent = true
 
   filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-2.0*"]
-  }
-
-  filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
 
   filter {
     name = "architecture"
-    values = ["x86"]
+    values = ["x86_64"]
   }
 
   owners = ["amazon"]
@@ -55,12 +50,11 @@ resource "aws_security_group" "http_server_sg" {
 
 resource "aws_instance" "http_server" {
   ami                    = data.aws_ami.amazon_linux.id
-  key_name               = "default-ec2"
   instance_type          = "t2.micro"
   associate_public_ip_address = true
 
   root_block_device {
-    volume_size = 8
+    volume_size = 30
     volume_type = "gp2"
   }
 
@@ -82,6 +76,6 @@ resource "aws_instance" "http_server" {
 #      "sudo yum install httpd -y",
 #      "sudo service httpd start",
 #      "echo HELLO WORLD | sudo tee /var/www/html/index.html"
-    ]
-  }
+#    ]
+#  }
 }
