@@ -23,32 +23,40 @@ data "aws_ami" "amazon_linux" {
 #  public_key = var.public_key
 #}
 
-resource "aws_security_group" "machine_access" {
-  name_prefix = local.system_name
+
+resource "aws_security_group" "http_server_sg" {
+  name = "http_server_sg"
 
   ingress {
-    description = "SSH & HTTP"
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = -1
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    name = "http_server_sg"
   }
 }
 
-resource "aws_instance" "machine" {
-  ami = data.aws_ami.amazon_linux.id
-  instance_type = "t2.micro"
-  iam_instance_profile = aws_iam_instance_profile.machine.id
-#  key_name = aws_key_pair.test.key_name
+resource "aws_instance" "http_server" {
+  ami                    = data.aws_ami.amazon_linux.id
+  key_name               = "default-ec2"
+  instance_type          = "t2.micro"
   associate_public_ip_address = true
 
   root_block_device {
@@ -60,14 +68,20 @@ resource "aws_instance" "machine" {
     Name = local.system_name
   }
 
-  vpc_security_group_ids = [aws_security_group.machine_access.id]
-#  cloudinit = data.cloudinit_config.init.rendered
-}
+  vpc_security_group_ids = [aws_security_group.http_server_sg.id]
 
-#data "cloudinit_config" "init" {
-#  part {
-#    content_type = "text/x-shellscript"
-#    content = templatefile("${path.module}/run.sh",{SYSTEM_NAME=local.system_name})
-#    filename = "run.sh"
+#  connection {
+#    type        = "ssh"
+#    host        = self.public_ip
+#    user        = "ec2-user"
+#    private_key = file(var.aws_key_pair)
 #  }
-#}
+#
+#  provisioner "remote-exec" {
+#    inline = [
+#      "sudo yum install httpd -y",
+#      "sudo service httpd start",
+#      "echo HELLO WORLD | sudo tee /var/www/html/index.html"
+    ]
+  }
+}
