@@ -64,7 +64,7 @@ resource "aws_instance" "http_server" {
 
   vpc_security_group_ids = [aws_security_group.http_server_sg.id]
   
-  key_name = us-east-key
+  key_name = "us-east-key"
 
 #  connection {
 #    type        = "ssh"
