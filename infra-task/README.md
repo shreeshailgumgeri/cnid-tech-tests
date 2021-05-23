@@ -4,7 +4,7 @@
 - Infrastructure as a code :  Terraform
 - Cloud infrastructure : AWS
 - Web App : Apache
-- Its Hosted & Accessible in : http://50.112.182.11:80/
+- Its Hosted & Accessible in : http://35.175.179.179:80/
 
 ## Steps
 - git clone https://github.com/shreeshailgumgeri/cnid-tech-tests.git
