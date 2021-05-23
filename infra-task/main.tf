@@ -8,5 +8,5 @@ provider "aws" {
 }
 
 locals {
-  system_name = "shree_test"
+  system_name = "shree_Web_App"
 }
