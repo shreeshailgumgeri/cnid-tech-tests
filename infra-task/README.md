@@ -1,9 +1,9 @@
 # Interview : *** PROBLEM SOLVED ***
 
 ## Created Hello World Web Application using below tools
-- Infrastructure as a code :  Terraform
-- Cloud infrastructure : AWS
-- Web App : Apache
+- TERRAFORM : Infrastructure as a code :  
+- AWS : Cloud infrastructure
+- APACHE : Web App Server
 - Its Hosted & Accessible in : http://35.175.179.179:80/
 
 ## Steps
