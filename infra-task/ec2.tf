@@ -61,6 +61,8 @@ resource "aws_instance" "http_server" {
   tags = {
     Name = local.system_name
   }
+  
+  key_name = us-east-key
 
   vpc_security_group_ids = [aws_security_group.http_server_sg.id]
 
