@@ -6,6 +6,10 @@
 - Web App : Apache
 - Its Hosted & Accessible in : http://50.112.182.11:80/
 
+## Steps
+- git clone https://github.com/shreeshailgumgeri/cnid-tech-tests.git
+- python run.py (This script helps with further steps to run the application)
+
 ## Context
 
 In the final stage of our interview process we want to discover how you handle infrastructure day-to-day. In preparation for the interview we request you complete the following task.
