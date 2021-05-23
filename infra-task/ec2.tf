@@ -60,4 +60,13 @@ resource "aws_instance" "http_server" {
   vpc_security_group_ids = [aws_security_group.http_server_sg.id]
 
   key_name = "us-east-key"
+  
+  user_data = <<-EOF
+  			  #!/bin/bash
+  			  yum install httpd -y
+  			  systemctl start httpd
+  			  systemctl status httpd
+  			  echo "<html> <h1>Shreeshail Says Hello World Conde Nast</h1> </html>" > /var/www/html/index.html
+  			  EOF
+
 }
