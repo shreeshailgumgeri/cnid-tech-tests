@@ -7,15 +7,15 @@ data "aws_ami" "amazon_linux" {
   }
 
   filter {
-    name = "architecture"
+    name   = "architecture"
     values = ["x86_64"]
   }
 
   owners = ["amazon"]
 }
 
-resource "aws_security_group" "http_server_sg" {
-  name = "http_server_sg"
+resource "aws_security_group" "http_server_sg2" {
+  name = "http_server_sg2"
 
   ingress {
     from_port   = 80
@@ -39,13 +39,13 @@ resource "aws_security_group" "http_server_sg" {
   }
 
   tags = {
-    name = "http_server_sg"
+    name = "http_server_sg2"
   }
 }
 
 resource "aws_instance" "http_server" {
-  ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = "t2.micro"
+  ami                         = data.aws_ami.amazon_linux.id
+  instance_type               = "t2.micro"
   associate_public_ip_address = true
 
   root_block_device {
@@ -57,10 +57,10 @@ resource "aws_instance" "http_server" {
     Name = local.system_name
   }
 
-  vpc_security_group_ids = [aws_security_group.http_server_sg.id]
+  vpc_security_group_ids = [aws_security_group.http_server_sg2.id]
 
   key_name = "us-east-key"
-  
+
   user_data = <<-EOF
   			  #!/bin/bash
   			  yum install httpd -y
