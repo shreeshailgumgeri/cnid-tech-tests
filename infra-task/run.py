@@ -26,7 +26,7 @@ public_ip = raw_input("{}Enter EC2 Public IP (Ex : 34.224.174.132 ) : ".format(b
 
 print("_"*100)
 
-print("{}Step 1 (LOGIN to instance) : \n{}ssh - i {} ec2-user@{}".format(begining_space, begining_space, key_pair_path, public_ip))
+print("{}Step 1 (LOGIN to instance) : \n{}ssh -i {} ec2-user@{}".format(begining_space, begining_space, key_pair_path, public_ip))
 
 print("{}Step 2 (Switch to Super User) : \n{}sudo su - ".format(begining_space, begining_space))
 
@@ -47,3 +47,4 @@ print("\n\n{}{}*** THANK YOU FOR USING THE APPLICATION ***".format(begining_spac
 print("_"*100)
 print("_"*100)
 print("\n\n")
+
