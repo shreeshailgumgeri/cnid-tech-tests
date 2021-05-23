@@ -33,6 +33,5 @@ print("{}STEP (Destroy IAAC) :\n{}>>terraform destroy".format(begining_space, be
 raw_input()
 print("\n\n{}{}*** THANK YOU FOR USING THE APPLICATION ***".format(begining_space, begining_space))
 raw_input()
-print("_"*100)
-print("_"*100)
+print("{}{}{}".format("_"*47, " END ", "_"*48))
 print("\n\n")
